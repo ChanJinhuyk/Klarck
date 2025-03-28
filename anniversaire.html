@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Joyeux Anniversaire Klarck</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            overflow: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .video-background {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: -1;
+        }
+
+        .container {
+            text-align: center;
+            z-index: 1;
+            background-color: rgba(0, 0, 0, 0.5);
+            padding: 30px;
+            border-radius: 15px;
+            max-width: 80%;
+        }
+
+        .btn {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            font-size: 18px;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        .btn:hover {
+            background-color: #45a049;
+            transform: scale(1.05);
+        }
+
+        .klarck-image {
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 5px solid white;
+            box-shadow: 0 0 30px rgba(255, 255, 255, 0.5);
+            margin: 20px auto;
+            display: none;
+            opacity: 0;
+            transform: scale(0.5);
+            transition: all 1s;
+        }
+
+        .message-container {
+            min-height: 150px;
+            margin-top: 20px;
+        }
+
+        .message {
+            font-size: 24px;
+            color: white;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+            margin-bottom: 10px;
+            opacity: 0;
+            transition: opacity 1s;
+        }
+
+        .credit {
+            font-style: italic;
+            font-size: 16px;
+            color: #ddd;
+            opacity: 0;
+            transition: opacity 1s;
+        }
+
+        .visible {
+            opacity: 1;
+            transform: scale(1);
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <button class="btn" id="birthdayBtn">Clique pour Klarck !</button>
+        
+        <img src="klarck.jpg" alt="Photo de Klarck" class="klarck-image" id="klarckImage">
+        
+        <div class="message-container">
+            <div class="message" id="message"></div>
+            <div class="credit" id="credit"></div>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('birthdayBtn').addEventListener('click', function() {
+            // Affiche l'image de Klarck
+            const klarckImage = document.getElementById('klarckImage');
+            klarckImage.style.display = 'block';
+            setTimeout(() => {
+                klarckImage.classList.add('visible');
+            }, 100);
+
+            // Désactive le bouton
+            this.disabled = true;
+            this.textContent = '🎉 Joyeux Anniversaire ! 🎉';
+
+            // Affiche le message progressivement
+            const fullMessage = "Joyeux anniversaire Klarck ! Profite bien de cette journée spéciale.";
+            const messageElement = document.getElementById('message');
+            const creditElement = document.getElementById('credit');
+            
+            let i = 0;
+            const typing = setInterval(() => {
+                if (i < fullMessage.length) {
+                    messageElement.textContent += fullMessage.charAt(i);
+                    i++;
+                } else {
+                    clearInterval(typing);
+                    messageElement.classList.add('visible');
+                    
+                    // Affiche le crédit après un délai
+                    setTimeout(() => {
+                        creditElement.textContent = "Fait avec ❤️ par l'équipe Développeur DI/GL";
+                        creditElement.classList.add('visible');
+                    }, 1000);
+                }
+            }, 50);
+        });
+    </script>
+</body>
+</html>
